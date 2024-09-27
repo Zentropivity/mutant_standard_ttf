@@ -1,0 +1,9 @@
+[submodule "mutant_standard"]
+	path = mutant_standard
+	url = https://github.com/mutantstandard/build.git
+[submodule "orxporter"]
+	path = orxporter
+	url = https://github.com/mutantstandard/orxporter.git
+[submodule "nanoemoji"]
+	path = nanoemoji
+	url = https://github.com/googlefonts/nanoemoji.git
