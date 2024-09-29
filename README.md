@@ -22,9 +22,10 @@ If you want to be able to fuzzy find specific emoji from the Mutant Standard set
 The output text file will have the format of `emoji character` `space` `emoji shortcode` (so a line may be like this: `😸 cat_smile`)
 
 There is an example fuzzy finder *nushell* script (module) using `sk` and `wl-copy` at `./tools/_memoji.nu`  
-Use it like `use ./tools/_memoji.nu *` then `memoji copy` to pick and copy to clipboard.
+Use it like `use ./tools/_memoji.nu *` then `memoji copy` to pick and copy to clipboard.  
+It may look like this: (rendering still has to be supported by your terminal in ways...)
 
-TODO pic
+![Screenshot_20240929_120700](https://github.com/user-attachments/assets/146ce312-a515-4604-b20d-e1744645709d)
 
 Or if you know you want to touch 3 files named as different emoji, run this after the use: `for $ in 1..3 { memoji | touch $in }`
 
