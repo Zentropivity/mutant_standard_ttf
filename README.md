@@ -16,6 +16,18 @@ First you need to make sure the required tools are installed:
    this produces the font file in `out/build/MutantStandard-Regular.ttf`
 3. On linux, you could also copy the font and its license to the system fonts by running `sudo ./install.nu`
 
+## Fuzzy finder!
+
+If you want to be able to fuzzy find specific emoji from the Mutant Standard set, you could try running `export_memoji_codes.nu`  
+The output text file will have the format of `emoji character` `space` `emoji shortcode` (so a line may be like this: `😸 cat_smile`)
+
+There is an example fuzzy finder *nushell* script (module) using `sk` and `wl-copy` at `./tools/_memoji.nu`  
+Use it like `use ./tools/_memoji.nu *` then `memoji copy` to pick and copy to clipboard.
+
+TODO pic
+
+Or if you know you want to touch 3 files named as different emoji, run this after the use: `for $ in 1..3 { memoji | touch $in }`
+
 ## License
 
 Everything in this repository is licensed under a MIT license, except the materials used under the repositories in the following folders have their own licensing:
