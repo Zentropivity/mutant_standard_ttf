@@ -6,7 +6,7 @@
 export def memoji []: nothing -> any {
   # let table_dir = $"($env.HOME)/.config/nushell/share"
   let table_dir = $"."
-  let mutant_table = $"($table_dir)/mutant-table.txt"
+  let mutant_table = $"($table_dir)/mutant_table.txt"
 
   # sk may exit on cancel
   try {
