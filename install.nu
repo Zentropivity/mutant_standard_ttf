@@ -1,4 +1,5 @@
 #!/usr/bin/nu
 
-cp -r ./mutant_standard/manifest/license /usr/share/licenses/ttf-mutant-standard
-cp ./out/build/MutantStandard-Regular.ttf /usr/share/fonts/TTF/
+cp -r -f ./mutant_standard/manifest/license /usr/share/licenses/ttf-mutant-standard
+mkdir /usr/share/fonts/mutant-standard
+cp -f ./out/build/MutantStandard-*.ttf /usr/share/fonts/mutant-standard/

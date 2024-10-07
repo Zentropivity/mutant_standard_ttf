@@ -12,11 +12,12 @@ First you need to make sure the required tools are installed:
 
 0. Make sure you have the submodules. Either clone this repo with `--recursive` or do `git submodule update --init`
 1. Create a python virtual environment and activate it, like: `python -m venv venv` then source the activation file for your shell (for nushell just run `./pyvenv`)
-2. Run `./build_ttf.nu`  
-   this produces the font file in `out/build/MutantStandard-Regular.ttf`
+2. Run `./build_ttf.nu -i cbdt`  
+   this produces the font file in `out/build/MutantStandardEmoji-CBDT.ttf`  
+   (Note: you can build other font formats too, check `./build_ttf.nu -h` or the script for more info)
 3. On linux, you could also copy the font and its license to the system fonts by running `sudo ./install.nu`
 
-## Fuzzy finder!
+## Fuzzy finder in the command line!
 
 If you want to be able to fuzzy find specific emoji from the Mutant Standard set, you could try running `export_memoji_codes.nu`  
 The output text file will have the format of `emoji character` `space` `emoji shortcode` (so a line may be like this: `😸 cat_smile`)
