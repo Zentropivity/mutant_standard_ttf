@@ -4,8 +4,9 @@
 # you should be running this from some venv...
 def main [
   --install_deps (-i) # install the deps of orxporter and nanoemoji
-  --all_formats (-a) # build all the formats (that we may need)
-  format="cbdt" # colr_glyf / colr_cff / cbdt / sbix / svg / raw
+  --all_formats (-a) # build all the formats that nanoemoji supports! (this may take a while)
+  --no_generate (-n) # do not generate svg from the input files (may save you a few seconds when repeatedly building)
+  format="cbdt" # cbdt|cff2_colr_0|cff2_colr_1|cff_colr_0|cff_colr_1|glyf|glyf_colr_0|glyf_colr_1|picosvg|picosvgz|sbix|untouchedsvg|untouchedsvgz
 ] {
   if $install_deps {
     pip install -r orxporter/requirements.txt
@@ -13,39 +14,63 @@ def main [
   }
 
   if $all_formats {
-    generate
+    if (not $no_generate) {
+      generate
+    }
     [
-      ["glyf_colr_1","COLR-GLYF"],
-      ["cff2_colr_1","COLR-CFF"],
-      ["cbdt","CBDT"],
-      ["sbix","SBIX"],
-      ["picosvg","SVG"],
-      ["untouchedsvg","Raw"],
-    ] | each {|p| do_build $p.0 $p.1 e>| print -e | print}
+      "cbdt",
+      "cff2_colr_0",
+      "cff2_colr_1",
+      "cff_colr_0",
+      "cff_colr_1",
+      "glyf",
+      "glyf_colr_0",
+      "glyf_colr_1",
+      "picosvg",
+      "picosvgz",
+      "sbix",
+      "untouchedsvg",
+      "untouchedsvgz",
+    ] | each {|p| build_format $p e>| print -e | print}
     return null
   } else {
-    if $format == "colr_glyf" {
+    if (not $no_generate) {
       generate
-      do_build "glyf_colr_1" "COLR-GLYF"
-    } else if $format == "colr_cff" {
-      generate
-      do_build "cff2_colr_1" "COLR-CFF"
-    } else if $format == "cbdt" {
-      generate
-      do_build "cbdt" "CBDT"
-    } else if $format == "sbix" {
-      generate
-      do_build "sbix" "SBIX"
-    } else if $format == "svg" {
-      generate
-      do_build "picosvg" "SVG"
-    } else if $format == "raw" {
-      generate
-      do_build "untouchedsvg" "SVG-Raw"
-    } else {
-      print $"Unrecognized format: ($format)"
-      exit 1
     }
+    build_format $format
+  }
+}
+
+def build_format [format] {
+  if $format == "cbdt" {
+    do_build "cbdt" "CBDT"
+  } else if $format == "cff2_colr_0" {
+    do_build "cff2_colr_0" "CFF2-COLR-0"
+  } else if $format == "cff2_colr_1" {
+    do_build "cff2_colr_1" "CFF2-COLR-1"
+  } else if $format == "cff_colr_0" {
+    do_build "cff_colr_0" "CFF-COLR-0"
+  } else if $format == "cff_colr_1" {
+    do_build "cff_colr_1" "CFF-COLR-1"
+  } else if $format == "glyf" {
+    do_build "glyf" "GLYF"
+  } else if $format == "glyf_colr_0" {
+    do_build "glyf_colr_0" "GLYF-COLR-0"
+  } else if $format == "glyf_colr_1" {
+    do_build "glyf_colr_1" "GLYF-COLR-1"
+  } else if $format == "picosvg" {
+    do_build "picosvg" "PICOSVG"
+  } else if $format == "picosvgz" {
+    do_build "picosvgz" "PICOSVGZ"
+  } else if $format == "sbix" {
+    do_build "sbix" "SBIX"
+  } else if $format == "untouchedsvg" {
+    do_build "untouchedsvg" "UNTOUCHEDSVG"
+  } else if $format == "untouchedsvgz" {
+    do_build "untouchedsvgz" "UNTOUCHEDSVGZ"
+  } else {
+    print $"Unrecognized format: ($format)"
+    exit 1
   }
 }
 
